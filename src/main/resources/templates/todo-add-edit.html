@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base-template :: layout(~{::title}, ~{::section})}">
+<head>
+     <title>Add Todo</title>
+</head>
+<body>
+<section>
+     <div class="container">
+          <h3 th:text="${(editForm ? 'Edit' : 'Add') + ' Todo'}"></h3>
+          <form method="post" th:object="${todo}">
+               <table>
+                    <tr>
+                         <td><label for="task">Task:</label></td>
+                         <td><input type="text" th:field="*{task}" id="task"/></td>
+                         <td th:if="${#fields.hasErrors('task')}"
+                             th:errors="*{task}"
+                             style="color: red"></td>
+                    </tr>
+                    <tr>
+                         <td><label for="dueDate">Schedule:</label></td>
+                         <td><input type="date" th:field="*{dueDate}" id="dueDate"/></td>
+                         <td th:if="${#fields.hasErrors('dueDate')}"
+                             th:errors="*{dueDate}"
+                             style="color: red" ></td>
+                    </tr>
+                    <tr>
+                         <td>
+                              <input type="submit" value="Save" class="btn btn-success">
+                         </td>
+                    </tr>
+               </table>
+          </form>
+     </div>
+</section>
+</body>
+</html>

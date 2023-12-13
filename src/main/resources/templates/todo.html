@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base-template :: layout(~{::title}, ~{::section})}">
+<head>
+     <title>Todos</title>
+</head>
+<body>
+<section>
+     <div class="container">
+          <table class="table">
+               <thead>
+               <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Todo</th>
+                    <th scope="col">Due</th>
+                    <th scope="col">Done</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+               </tr>
+               </thead>
+               <tbody>
+               <tr th:each="todo : ${todos}">
+                    <td th:text="${todo.getId()}" class="col-1 align-middle"></td>
+                    <td th:text="${todo.getTask()}" class="align-middle"></td>
+                    <td th:text="${todo.getDueDate()}" class="col-2 align-middle"></td>
+                    <td th:text="${todo.isDone()}" class="col-1 align-middle"></td>
+                    <td class="col-1">
+                         <a th:href="@{/todo/edit/{id}(id=${todo.getId()})}"
+                            class="btn btn-success">Edit</a>
+                    </td>
+                    <td class="col-1">
+                         <form method="POST" th:action="@{/todo/delete/{id}(id=${todo.getId()})}">
+                              <button type="submit" class="btn btn-danger">Delete</button>
+                         </form>
+                    </td>
+               </tr>
+               </tbody>
+          </table>
+          <a href="/todo/add" class="btn btn-success">Add Todo</a>
+     </div>
+</section>
+</body>
+</html>
